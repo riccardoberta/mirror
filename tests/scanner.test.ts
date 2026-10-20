@@ -7,6 +7,17 @@ import { makeTempDir } from './helpers.js';
 
 const opts = () => scanOptionsFrom(DEFAULT_ENGINE_OPTIONS, 10);
 
+/** True when the filesystem holding `dir` folds case (macOS default, Windows). */
+async function isCaseInsensitive(dir: string): Promise<boolean> {
+  const probe = path.join(dir, '.case-probe');
+  await fs.mkdir(probe, { recursive: true });
+  await fs.writeFile(path.join(probe, 'a'), '1');
+  await fs.writeFile(path.join(probe, 'A'), '2');
+  const n = (await fs.readdir(probe)).length;
+  await fs.rm(probe, { recursive: true, force: true });
+  return n === 1;
+}
+
 describe('scanLocal', () => {
   it('inventories files, folders and empty folders; excludes macOS noise', async () => {
     const dir = await makeTempDir({
@@ -52,6 +63,12 @@ describe('scanLocal', () => {
   it('reports case collisions and removes both siblings from the mirrorable set', async () => {
     const dir = await makeTempDir({ 'Readme.md': '1', 'readme.md': '2', 'other.txt': '3', 'Dir/f.txt': 'f', 'dir/g.txt': 'g' });
     const inv = await scanLocal(dir, opts());
+    if (await isCaseInsensitive(dir)) {
+      // macOS APFS/HFS+ default: the two spellings are the same file/folder, so no collision can exist locally.
+      expect(inv.problems.filter((p) => p.kind === 'caseCollision')).toEqual([]);
+      expect([...inv.entries.keys()].map((k) => k.toLowerCase()).sort()).toEqual(['dir', 'dir/f.txt', 'dir/g.txt', 'other.txt', 'readme.md']);
+      return;
+    }
     expect([...inv.entries.keys()]).toEqual(['other.txt']);
     expect(inv.problems.filter((p) => p.kind === 'caseCollision').map((p) => p.relPath).sort()).toEqual(['Dir', 'Readme.md', 'dir', 'readme.md']);
   });
