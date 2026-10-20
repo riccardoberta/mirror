@@ -9,7 +9,7 @@ export type { Issue, Progress, RunOutcome, PairOutcome };
 export interface AppSettings {
   /** Microsoft Entra application (client) ID. Never embedded in code; entered by the user. */
   clientId: string;
-  /** 'organizations' | 'common' | 'consumers' | tenant GUID | verified domain (e.g. unige.it). */
+  /** 'organizations' | 'common' | 'consumers' | tenant GUID | verified domain (e.g. contoso.com). */
   tenant: string;
   excludeNames: string[];
   excludePrefixes: string[];

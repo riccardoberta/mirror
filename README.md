@@ -106,7 +106,7 @@ The setup screen has two steps; none of them transfers any file. Configure one d
 
 1. **Choose at least one destination.**
    - *OneDrive*: paste the *Application (client) ID* and the tenant (`organizations` for any
-     work/school account, your tenant domain such as `unige.it`, `consumers` for a personal account),
+     work/school account, your organization's tenant domain such as `contoso.com`, `consumers` for a personal account),
      press **Connect OneDrive** (browser sign-in), then create or pick the **root folder** (default
      `Mirror`). The OneDrive root itself cannot be chosen.
    - *Remote disk*: enter host (Tailscale name or IP), user, private key file, root folder (e.g.

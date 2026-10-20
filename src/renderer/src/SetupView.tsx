@@ -183,7 +183,7 @@ export function OneDriveSetup({ state, onError, onOpenSettings }: { state: AppSt
             <Field label="Application (client) ID">
               <input value={clientId} onChange={(e) => setClientId(e.target.value)} placeholder="xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx" spellCheck={false} />
             </Field>
-            <Field label="Tenant" hint='"organizations" for work/school accounts, or your tenant domain (e.g. unige.it)'>
+            <Field label="Tenant" hint={'"organizations" for work/school accounts, or your organization\'s tenant domain (e.g. contoso.com)'}>
               <input value={tenant} onChange={(e) => setTenant(e.target.value)} spellCheck={false} />
             </Field>
           </div>

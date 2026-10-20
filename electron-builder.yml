@@ -1,4 +1,4 @@
-appId: it.unige.elios.mirror
+appId: app.mirror.desktop
 productName: Mirror
 directories:
   output: dist

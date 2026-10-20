@@ -71,7 +71,7 @@ deletes the test root (OneDrive recycle bin) unless `--keep` is given.
 ```bash
 # on your Mac, in the project folder
 npm install
-MIRROR_CLIENT_ID=<your app id> MIRROR_TENANT=unige.it npm run test:real
+MIRROR_CLIENT_ID=<your app id> MIRROR_TENANT=organizations npm run test:real
 # or, once the app is configured, simply:
 npm run test:real
 ```

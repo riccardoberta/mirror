@@ -183,6 +183,6 @@ export function normalizeTenant(t: string): string {
   if (!v) return 'organizations';
   if (['common', 'organizations', 'consumers'].includes(v)) return v;
   if (/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(v)) return v;
-  if (/^[a-z0-9.-]+\.[a-z]{2,}$/i.test(v)) return v; // verified domain, e.g. unige.it
-  throw new Error(`Invalid tenant "${t}". Use "organizations", "common", "consumers", a tenant ID or a domain like unige.it.`);
+  if (/^[a-z0-9.-]+\.[a-z]{2,}$/i.test(v)) return v; // verified domain, e.g. contoso.com
+  throw new Error(`Invalid tenant "${t}". Use "organizations", "common", "consumers", a tenant ID or your organization's domain (e.g. contoso.com).`);
 }
