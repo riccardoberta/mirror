@@ -1,0 +1,12 @@
+node_modules/
+out/
+dist/
+*.log
+.DS_Store
+.vite/
+coverage/
+real-test-report-*.md
+real-test-sftp-report-*.md
+
+# Cowork session artefacts
+Claude outputs/

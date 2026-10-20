@@ -1,0 +1,33 @@
+appId: it.unige.elios.mirror
+productName: Mirror
+directories:
+  output: dist
+  buildResources: build
+files:
+  - out/**
+  - package.json
+asar: true
+mac:
+  category: public.app-category.utilities
+  target:
+    - dmg
+    - zip
+  # Unsigned local build (nothing is published). Right-click → Open on first launch.
+  identity: null
+  hardenedRuntime: false
+  gatekeeperAssess: false
+  # Mirror is not sandboxed: it needs plain filesystem access to the folders you choose.
+  # macOS still asks for permission (TCC) the first time it reads Desktop/Documents/Downloads
+  # or removable volumes; grant it once and it is remembered.
+  extendInfo:
+    NSDocumentsFolderUsageDescription: Mirror reads the folders you selected to copy them to OneDrive.
+    NSDesktopFolderUsageDescription: Mirror reads the folders you selected to copy them to OneDrive.
+    NSDownloadsFolderUsageDescription: Mirror reads the folders you selected to copy them to OneDrive.
+    NSRemovableVolumesUsageDescription: Mirror reads the folders you selected to copy them to OneDrive.
+    NSNetworkVolumesUsageDescription: Mirror reads the folders you selected to copy them to OneDrive.
+win:
+  target: nsis
+linux:
+  target: AppImage
+  category: Utility
+publish: null
