@@ -1,4 +1,4 @@
-import { promises as fs } from 'node:fs';
+import { existsSync, promises as fs } from 'node:fs';
 import * as path from 'node:path';
 import { BrowserWindow, app, dialog, ipcMain, nativeTheme, shell } from 'electron';
 import { GraphClient } from '../core/graph/client.js';
@@ -411,8 +411,18 @@ function isInside(child: string, parent: string): boolean {
 /* Window                                                              */
 /* ------------------------------------------------------------------ */
 
+/** Icon used in development (packaged builds get it from electron-builder's build/ resources). */
+function devIconPath(): string | undefined {
+  if (app.isPackaged) return undefined;
+  const p = path.join(import.meta.dirname, '../../build/icon.png');
+  return existsSync(p) ? p : undefined;
+}
+
 function createWindow(): void {
+  const icon = devIconPath();
+  if (icon && process.platform === 'darwin') app.dock?.setIcon(icon);
   win = new BrowserWindow({
+    ...(icon && process.platform !== 'darwin' ? { icon } : {}),
     width: 860,
     height: 680,
     minWidth: 700,

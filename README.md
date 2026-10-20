@@ -96,6 +96,7 @@ npm run dist:win     # → dist/Mirror Setup <version>.exe
 npm run dist:linux   # → dist/Mirror-<version>.AppImage
 ```
 
+The app icon comes from `build/icon.icns` / `icon.ico` / `icon.png` (source: `build/icon.svg`).
 The build is unsigned (nothing is published or notarised). On macOS, open it the first time with
 right-click → **Open**, or run `xattr -dr com.apple.quarantine dist/mac*/Mirror.app`.
 
